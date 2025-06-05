@@ -1,4 +1,6 @@
-import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
+
 import { MercadoPago } from "./service/gatway/MercadoPago";
 
 async function main() {

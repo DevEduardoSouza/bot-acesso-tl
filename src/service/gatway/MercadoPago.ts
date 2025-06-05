@@ -24,7 +24,7 @@ export class MercadoPago {
       const payment = new Payment(this.client);
 
       const requestOptions = {
-        idempotencyKey: generateSecureRandomString(),
+        idempotencyKey: generateSecureRandomString() + "rewred",
       };
 
       const paymentResponse: PaymentResponse = await payment.create({
@@ -33,9 +33,23 @@ export class MercadoPago {
       });
 
       return paymentResponse;
-    } catch (error) {
-      console.error(error);
-      throw new Error("Error al crear el pago");
+    } catch (error: any) {
+      if (error?.cause) {
+        console.error(
+          "💥 Mercado Pago API error:",
+          JSON.stringify(error.cause, null, 2)
+        );
+      } else {
+        console.error("💥 Erro inesperado:", error);
+      }
+      throw new Error("❌ Erro ao criar o pagamento via Mercado Pago.");
     }
+  }
+
+  public async getPaymentStatus(
+    paymentId: string | number
+  ): Promise<PaymentResponse> {
+    const payment = new Payment(this.client);
+    return await payment.get({ id: paymentId });
   }
 }

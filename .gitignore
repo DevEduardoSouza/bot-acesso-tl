@@ -22,3 +22,5 @@ log
 # Arquivos de IDEs
 .vscode/
 .idea/
+
+transactions.db
