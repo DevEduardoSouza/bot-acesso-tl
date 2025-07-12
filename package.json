@@ -3,8 +3,16 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "ts-node -r tsconfig-paths/register src/app.ts",
+    "dev": "nodemon --watch src/ --exec ts-node -r tsconfig-paths/register src/app.ts -e ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --watch src/ --exec ts-node -r tsconfig-paths/register src/app.ts -e ts"
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "setup": "cp env.example .env && echo 'Arquivo .env criado. Configure as variáveis de ambiente.'",
+    "backup": "cp bot_acesso.db backup_$(date +%Y%m%d_%H%M%S).db",
+    "reset": "rm -f bot_acesso.db && echo 'Banco de dados resetado.'"
   },
   "keywords": [],
   "author": "",
